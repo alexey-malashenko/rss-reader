@@ -15,7 +15,9 @@ def get_args():
         'source',
         help='RSS URL',
         nargs='?',
-        default=''
+        # default='https://news.yahoo.com/rss/'  # TODO: debug
+        default='http://rss.cnn.com/rss/edition_world.rss'
+
     )
     parser.add_argument(
         '--version',
@@ -26,17 +28,22 @@ def get_args():
     parser.add_argument(
         '--json',
         help='Print result as JSON in stdout',
-        action='store_true'
+        action='store_true',
+        # default=True  # TODO: debug
+        default = False  # TODO: debug
     )
     parser.add_argument(
         '--verbose',
         help='Outputs verbose status messages',
-        action='store_true'
+        action='store_true',
+        default=True  # TODO: debug
+        # default = False  # TODO: debug
     )
     parser.add_argument(
         '--limit',
         help='Limit news topics if this parameter provided',
-        type=int
+        type=int,
+        default=5  # TODO: debug
     )
 
     return parser.parse_args()

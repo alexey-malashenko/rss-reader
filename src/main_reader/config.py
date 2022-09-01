@@ -1,4 +1,5 @@
 """The module is to get the configuration"""
+import datetime
 
 
 def get_config(args):
@@ -12,5 +13,7 @@ def get_config(args):
     config['verbose'] = args.verbose
 
     config['limit'] = args.limit
+
+    config['datetime'] = datetime.datetime.now().strftime("%a, %d %b %Y %H:%M:%S +0000")
 
     return config
