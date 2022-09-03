@@ -1,6 +1,7 @@
 """The module is intended for working with parameters"""
 
 import argparse
+from src.main_reader import __version__
 
 
 def get_args():
@@ -15,36 +16,28 @@ def get_args():
     parser.add_argument(
         'source',
         help='RSS URL',
-        nargs='?',
-        # default='https://news.yahoo.com/rss/'  # TODO: debug
-        default='http://rss.cnn.com/rss/edition_world.rss'
-
+        nargs='?'
     )
     parser.add_argument(
         '--version',
         help='Print version info',
         action='version',
-        version='rss_reader 0.0.1'
+        version='rss_reader ' + __version__
     )
     parser.add_argument(
         '--json',
         help='Print result as JSON in stdout',
-        action='store_true',
-        default=True  # TODO: debug
-        # default = False  # TODO: debug
+        action='store_true'
     )
     parser.add_argument(
         '--verbose',
         help='Outputs verbose status messages',
-        action='store_true',
-        default=True  # TODO: debug
-        # default = False  # TODO: debug
+        action='store_true'
     )
     parser.add_argument(
         '--limit',
         help='Limit news topics if this parameter provided',
-        type=int,
-        default=2  # TODO: debug
+        type=int
     )
 
     return parser.parse_args()
