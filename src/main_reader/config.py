@@ -1,8 +1,14 @@
 """The module is to get the configuration"""
+
 import datetime
 
 
 def get_config(args):
+    """Define the config
+
+        Returns:
+            Config dict
+        """
 
     config = dict()
 

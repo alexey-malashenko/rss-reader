@@ -1,8 +1,15 @@
+"""The module is intended for logging --verbose"""
+
 import logging
 from orchestrator import getting_args
 
 
 def parameter_log():
+    """Define the parameters for logging
+
+        Returns:
+            logging if verbose
+        """
 
     args = getting_args()
 
@@ -19,6 +26,11 @@ def parameter_log():
 
 
 def logging_dec(func):
+    """Define the decorator for logging
+
+        Returns:
+            wrapper
+        """
 
     log = parameter_log()
 

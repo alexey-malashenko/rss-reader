@@ -5,6 +5,7 @@ import argparse
 
 def get_args():
     """Define the launcher arguments with the default values.
+
     Returns:
         launcher parameters
     """
@@ -29,8 +30,8 @@ def get_args():
         '--json',
         help='Print result as JSON in stdout',
         action='store_true',
-        # default=True  # TODO: debug
-        default = False  # TODO: debug
+        default=True  # TODO: debug
+        # default = False  # TODO: debug
     )
     parser.add_argument(
         '--verbose',
@@ -43,7 +44,7 @@ def get_args():
         '--limit',
         help='Limit news topics if this parameter provided',
         type=int,
-        default=5  # TODO: debug
+        default=2  # TODO: debug
     )
 
     return parser.parse_args()

@@ -1,3 +1,5 @@
+"""The module is a core"""
+
 from logger import logging_dec, parameter_log
 from orchestrator import getting_args, getting_config
 from loader import loading
@@ -22,6 +24,7 @@ def main():
     """
 
     response = loading(config['source'])
+    print(type(response))
     rss = Rss(response, config)
     rss.print_rss()
 
