@@ -17,7 +17,6 @@ def get_args():
         'source',
         help='RSS URL',
         nargs='?'
-
     )
     parser.add_argument(
         '--version',
