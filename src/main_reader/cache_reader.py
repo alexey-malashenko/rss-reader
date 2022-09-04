@@ -1,8 +1,8 @@
 """The module is intended for reading RSS cache"""
 
 import json
-from logger import logging_dec, parameter_log
-from checker import check_cache_file
+from .logger import logging_dec, parameter_log
+from .checker import check_cache_file
 
 
 log = parameter_log()
@@ -17,16 +17,19 @@ class RssCacher:
 
     cash = []
     cash_json = []
+    cache_limited = []
+    cache_json_limited = []
 
     def __init__(self, config, path_cache):
         self.config = config
         self.path_cache = path_cache
         self.response = {}
-        self.parse_response()
+        self._parse_response()
         self.limit = self.get_limit()
+        self._limiting_cache()
 
     @logging_dec
-    def parse_response(self):
+    def _parse_response(self):
         """Define the structure of feeds
 
             Returns:
@@ -57,9 +60,11 @@ class RssCacher:
             date = value['Date']
             link = value['Link']
             links = value['Links']
+            source = value['Source']
             publish_date = value['publish_date']
 
-            self.cash.append({publish_date: {'Feed': feed, 'Title': title, 'Date': date, 'Link': link, 'Links': links}})
+            self.cash.append({publish_date: {'Feed': feed, 'Title': title, 'Date': date, 'Link': link, 'Links': links,
+                                             'Source': source}})
             log.info('Got cash: {}'.format(self.cash))
             self.cash_json = json.dumps(self.cash)
             log.info('Got cash_json: {}'.format(self.cash_json))
@@ -85,6 +90,19 @@ class RssCacher:
             return limit
 
     @logging_dec
+    def _limiting_cache(self):
+        """Define the limit for RSS
+
+            Returns:
+
+            """
+        for x in range(self.limit):
+            self.cache_limited.append(self.cash[x])
+
+        self.cache_json_limited = json.dumps(self.cache_limited)
+        log.info('Got cache_json_limited: {}'.format(self.cache_json_limited))
+
+    @logging_dec
     def print_rss(self):
         """Define the printing feeds
 
@@ -99,11 +117,11 @@ class RssCacher:
             return
 
         if self.config['json']:
-            parsed = json.loads(self.cash_json)
+            parsed = json.loads(self.cache_json_limited)
             log.info('Got parsed: {}'.format(parsed))
             print(json.dumps(parsed, indent=4, sort_keys=True))
         else:
-            for rss in self.cash:
+            for rss in self.cache_limited:
                 log.info('Got rss: {}'.format(rss))
                 for key, value in rss.items():
                     print(f"\nFeed: {value.get('Feed')}\n")

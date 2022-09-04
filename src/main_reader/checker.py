@@ -2,7 +2,10 @@
 
 import sys
 import json
-from logger import logging_dec, parameter_log
+from .logger import logging_dec, parameter_log
+
+
+log = parameter_log()
 
 
 @logging_dec
@@ -13,8 +16,6 @@ def check_response(resp):
             True if success
         """
 
-    log = parameter_log()
-
     if resp['bozo']:
         log.info('Error Response: {}'.format(resp['bozo_exception']))
         sys.exit('Error Response: {}'.format(resp['bozo_exception']))
@@ -24,7 +25,14 @@ def check_response(resp):
         return True
 
 
+@logging_dec
 def check_cache_file(path):
+    """Define the checking for cache
+
+        Returns:
+
+        """
+
     try:
         with open(path, 'r', encoding='utf-8'):
             pass
@@ -36,3 +44,29 @@ def check_cache_file(path):
 
             json_template = json.dumps(template, sort_keys=True)
             f.write(json_template)
+        log.info('Writing to json_template successful {}'.format(''))
+
+
+@logging_dec
+def check_full_rss_lst(*args):
+    """Define the checking for full rss list
+
+        Returns:
+            full_lst if exist
+        """
+
+    full_lst = []
+
+    if args:
+        for arg in args:
+            for news in arg:
+                for key, value in news.items():
+                    full_lst.append(value)
+
+        log.info('Got list: {}'.format(full_lst))
+        return full_lst
+
+    else:
+        print('no news')
+
+    return False

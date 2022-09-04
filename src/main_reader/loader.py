@@ -1,8 +1,8 @@
 """The module is intended for loading RSS"""
 
 import feedparser
-from logger import logging_dec, parameter_log
-from checker import check_response
+from .logger import logging_dec, parameter_log
+from .checker import check_response
 
 
 @logging_dec
