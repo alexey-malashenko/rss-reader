@@ -3,8 +3,8 @@
 import time
 import json
 from datetime import datetime
-from logger import logging_dec, parameter_log
-from checker import check_cache_file
+from .logger import logging_dec, parameter_log
+from .checker import check_cache_file
 
 
 log = parameter_log()
@@ -100,8 +100,8 @@ class Rss:
             log.info('Got cash_json: {}'.format(self.cash_json))
 
             key_dict = f"{publish_date}_{self.config['source']}_{title}"
-            self.cash_dict.update({key_dict:{'publish_date': publish_date, 'Feed': feed, 'Title': title, 'Date': date,
-                                             'Link': link, 'Links': links, 'Source': self.config['source']}})
+            self.cash_dict.update({key_dict: {'publish_date': publish_date, 'Feed': feed, 'Title': title, 'Date': date,
+                                              'Link': link, 'Links': links, 'Source': self.config['source']}})
 
     @logging_dec
     def print_rss(self):
@@ -132,6 +132,11 @@ class Rss:
 
     @logging_dec
     def _write_to_cache(self):
+        """Define the writing to cache
+
+            Returns:
+
+            """
 
         check_cache_file(self.path_cache)
         log.info('Cache checked: {}'.format(''))

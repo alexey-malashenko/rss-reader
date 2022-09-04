@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>rss reader (html)</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style type="text/css">
+      .container {
+        overflow: auto;
+        margin-top: 30px;
+        max-width: 1500px;
+        padding: 10px;
+        font-size: 22px;
+      }
+      p {
+        margin-top: 10px;
+        font-size: 22px;
+      }
+    </style>
+  </head>
+  <body>
+    {% for feed in html_rss %}
+    <div class="container">
+        <p>Feed: {{feed['Feed']}}</p>
+        <p>Title: {{feed['Title']}}</p>
+        <p>Link: <a href="{{feed['Link']}}" target="_blank">{{feed['Link']}}</a></p>
+        <p>Date: {{feed['Date']}}</p>
+        <p>Source: <a href="{{feed['Source']}}" target="_blank">{{feed['Source']}}</a></p>
+        <p  style=font-size:15px>Links:</p>
+        {% for link in feed['Links'] %}
+          <p  style=font-size:15px><a href="{{link}}" target="_blank">{{link}}</a></p>
+        {% endfor %}
+      </div>
+    {% endfor %}
+  </body>
+</html>

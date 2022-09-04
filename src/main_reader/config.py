@@ -28,4 +28,12 @@ def get_config(args):
 
     config['scenario'] = ''
 
+    config['to_html'] = args.to_html
+
+    config['to_pdf'] = args.to_pdf
+
+    config['path_for_html'] = 'rss_reader.html'
+
+    config['path_for_pdf'] = 'rss_reader.pdf'
+
     return config

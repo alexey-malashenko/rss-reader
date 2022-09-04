@@ -1,7 +1,7 @@
 """The module is intended for orchestration"""
 
-from config import get_config
-from args import get_args
+from .config import get_config
+from .args import get_args
 
 
 def getting_args():

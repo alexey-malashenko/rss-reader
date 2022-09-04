@@ -1,7 +1,7 @@
 """The module is intended for logging --verbose"""
 
 import logging
-from orchestrator import getting_args
+from .orchestrator import getting_args
 
 
 def parameter_log():
