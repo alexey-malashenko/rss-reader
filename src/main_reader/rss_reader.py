@@ -1,14 +1,21 @@
 """The module is a core"""
 
+import sys
 from logger import logging_dec, parameter_log
-from orchestrator import getting_args, getting_config
+from orchestrator import getting_args, getting_config, get_scenarios
 from loader import loading
 from rss_parser import Rss
+from pathlib import Path
+from cache_reader import RssCacher
 
 
 log = parameter_log()
 args = getting_args()
 config = getting_config()
+get_scenarios(config)
+
+sys.path.append(str(Path(__file__).parents[1].joinpath('main_reader', 'cache')))
+path_cache = str(Path(__file__).parents[1].joinpath('main_reader', 'cache', config['cache_name']))
 
 
 log.info('Started with args: {}'.format(args))
@@ -22,11 +29,21 @@ def main():
     Returns:
         None
     """
+    if config['scenario'] == 'scenario 1: get news from URL with limit or without limit':
+        response = loading(config['source'])
+        rss = Rss(response, config, path_cache)
+        rss.print_rss()
 
-    response = loading(config['source'])
-    print(type(response))
-    rss = Rss(response, config)
-    rss.print_rss()
+    if config['scenario'] == 'scenario 2: get news from cache with limit or without limit':
+        rss_cache = RssCacher(config, path_cache)
+        rss_cache.print_rss()
+
+    if config['scenario'] == 'scenario 3: get news from cache and URL with limit or without limit':
+        rss_cache = RssCacher(config, path_cache)
+        rss_cache.print_rss()
+        response = loading(config['source'])
+        rss = Rss(response, config, path_cache)
+        rss.print_rss()
 
 
 if __name__ == "__main__":
