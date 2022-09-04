@@ -4,6 +4,8 @@ import time
 import json
 from datetime import datetime
 from logger import logging_dec, parameter_log
+from checker import check_cache_file
+
 
 log = parameter_log()
 
@@ -17,12 +19,15 @@ class Rss:
 
     cash = []
     cash_json = []
+    cash_dict = {}
 
-    def __init__(self, response, config):
+    def __init__(self, response, config, path_cache):
         self.response = response
         self.config = config
         self.limit = self.get_limit()
+        self.path_cache = path_cache
         self.parse_response()
+        self._write_to_cache()
 
     @logging_dec
     def get_limit(self):
@@ -88,10 +93,15 @@ class Rss:
             publish_date = datetime.strptime(date, '%a, %d %b %Y %H:%M:%S +0000').date().__format__('%Y%m%d')
             log.info('Got publish_date: {}'.format(publish_date))
 
-            self.cash.append({publish_date: {'Feed': feed, 'Title': title, 'Date': date, 'Link': link, 'Links': links}})
+            self.cash.append({publish_date: {'Feed': feed, 'Title': title, 'Date': date, 'Link': link, 'Links': links,
+                                             'Source': self.config['source']}})
             log.info('Got cash: {}'.format(self.cash))
             self.cash_json = json.dumps(self.cash)
             log.info('Got cash_json: {}'.format(self.cash_json))
+
+            key_dict = f"{publish_date}_{self.config['source']}_{title}"
+            self.cash_dict.update({key_dict:{'publish_date': publish_date, 'Feed': feed, 'Title': title, 'Date': date,
+                                             'Link': link, 'Links': links, 'Source': self.config['source']}})
 
     @logging_dec
     def print_rss(self):
@@ -100,6 +110,8 @@ class Rss:
             Returns:
 
             """
+
+        print('\n********** DATA FROM URL **********\n')
 
         if self.config['json']:
             parsed = json.loads(self.cash_json)
@@ -117,3 +129,27 @@ class Rss:
                     for link in value.get('Links'):
                         print(f"{link}")
                     print(f"\n")
+
+    @logging_dec
+    def _write_to_cache(self):
+
+        check_cache_file(self.path_cache)
+        log.info('Cache checked: {}'.format(''))
+
+        with open(self.path_cache, "r") as file:
+            data = json.load(file)
+            log.info('Cache read: {}'.format(data))
+
+        data_dict = {}
+
+        for key, value in data.items():
+            data_dict.update({key: value})
+
+        data_dict.update(self.cash_dict)
+
+        log.info('Dict updated: {}'.format(data_dict))
+
+        with open(self.path_cache, "w") as f:
+            json_template = json.dumps(data_dict, sort_keys=True)
+            f.write(json_template)
+            log.info('Cache written: {}'.format(''))
