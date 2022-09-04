@@ -16,7 +16,8 @@ def get_args():
     parser.add_argument(
         'source',
         help='RSS URL',
-        nargs='?'
+        nargs='?',
+        metavar='source'
     )
     parser.add_argument(
         '--version',
@@ -27,17 +28,24 @@ def get_args():
     parser.add_argument(
         '--json',
         help='Print result as JSON in stdout',
-        action='store_true'
+        action='store_true',
+        default=False
     )
     parser.add_argument(
         '--verbose',
         help='Outputs verbose status messages',
-        action='store_true'
+        action='store_true',
+        default=False
     )
     parser.add_argument(
         '--limit',
         help='Limit news topics if this parameter provided',
         type=int
+    )
+    parser.add_argument(
+        '--date',
+        help='Print RSS news from cache',
+        action='store_true'
     )
 
     return parser.parse_args()

@@ -38,6 +38,7 @@ optional arguments:
   --json         Print result as JSON in stdout
   --verbose      Outputs verbose status messages
   --limit LIMIT  Limit news topics if this parameter provided
+  --date         Print news from cache
 
 ```
 
@@ -67,4 +68,5 @@ optional arguments:
 }
 ```
 
+* TODO: technical debt
 

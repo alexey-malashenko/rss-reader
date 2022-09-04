@@ -22,4 +22,10 @@ def get_config(args):
 
     config['datetime'] = datetime.datetime.now().strftime("%a, %d %b %Y %H:%M:%S +0000")
 
+    config['date'] = args.date
+
+    config['cache_name'] = 'rss_cache.json'
+
+    config['scenario'] = ''
+
     return config
