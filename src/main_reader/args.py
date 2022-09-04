@@ -40,7 +40,26 @@ def get_args():
     parser.add_argument(
         '--limit',
         help='Limit news topics if this parameter provided',
-        type=int
+        type=int,
+        default=False
+    )
+    parser.add_argument(
+        '--date',
+        help='Print RSS news from cache',
+        type=int,
+        default=False
+    )
+    parser.add_argument(
+        '--to_html',
+        help='Convert RSS news to .html',
+        action='store_true',
+        default=False
+    )
+    parser.add_argument(
+        '--to_pdf',
+        help='Convert RSS news to .pdf',
+        action='store_true',
+        default=False
     )
     parser.add_argument(
         '--date',
