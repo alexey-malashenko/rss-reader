@@ -68,5 +68,95 @@ optional arguments:
 }
 ```
 
-* TODO: technical debt
 
+
+## Installation
+
+```shell
+pip install -r requirements.txt
+```
+
+## Installation using setup
+
+```shell
+python -m pip install setuptools
+python setup.py install
+```
+## Run programm
+
+```shell
+python -m pip install setuptools
+python setup.py install
+```
+
+## Tests
+
+```shell
+coverage run -m pytest
+coverage html 
+```
+![text coverage](htmlcov/test_coverage.png)
+
+## Project Organization
+
+_NOTE: The structure is specified all rss_reader_
+
+    ├── htmlcov/                        <- Folder with rest coverage
+    │   └── ...                         
+    │   └── index.html                      <- html test result
+    │   └── ...        
+    │
+    ├── src/                            <- Source packade
+    │   └── main_reader/                <- Package with programm
+    │       ├── cache/                  <- Folder with rss cache
+    │       |   └── rss_cache.json
+    │       │
+    │       ├── output/                 <- Folder with pdf and html outputs
+    │       |   └── rss_reader.html
+    │       |   └── rss_reader.pdf
+    │       │
+    │       ├── template/               <- Folder with templates
+    │       |   └── html_tmp.html
+    │       │
+    |       ├── __init__.py                 <- version
+    │       │
+    |       ├── args.py                     <- working with parameters
+    │       │
+    |       ├── cache_reader.py             <- module is intended for reading RSS cache
+    │       │
+    |       ├── checker.py                  <- module is intended for check response
+    │       │
+    |       ├── config.py                   <- module is to get the configuration
+    │       │
+    |       ├── converter.py                <- module is intended for converting feeds fo html or pdf
+    │       │
+    |       ├── loader.py                   <- module is intended for loading RSS
+    │       │
+    |       ├── logger.py                   <- module is intended for logging --verbose
+    │       │
+    |       ├── orchestration.py            <- module is intended for orchestration
+    │       │
+    |       ├── rss_parser.py               <- module is intended for parsing and printing RSS
+    │       │
+    |       └── rss_reader.py               <- core module
+    │       
+    ├── tests/                          <- Folder with tests  
+    │   └── ...                         
+    │   └── test_....py                  
+    │   └── ...       
+    │       
+    ├── LICIENSE                            <- license file
+    |
+    ├── MANIFEST.in                     
+    |
+    ├── README.md
+    |
+    ├── requirements.txt                    <- list of libs
+    |
+    ├── setup.cfg                           <- configuretion
+    |
+    └── setup.py                            <- setup
+            
+
+
+--------
