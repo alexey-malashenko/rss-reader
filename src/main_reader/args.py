@@ -61,10 +61,5 @@ def get_args():
         action='store_true',
         default=False
     )
-    parser.add_argument(
-        '--date',
-        help='Print RSS news from cache',
-        action='store_true'
-    )
 
     return parser.parse_args()

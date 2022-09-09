@@ -13,6 +13,9 @@ args.add_argument('source', help='RSS URL', nargs='?', default='http://rss.cnn.c
 args.add_argument('--json', help='Print result as JSON in stdout', action='store_true', default=True)
 args.add_argument('--verbose', help='Outputs verbose status messages', action='store_true', default=True)
 args.add_argument('--limit', help='Limit news topics if this parameter provided', type=int, default=2)
+args.add_argument('--date', help='Print RSS news from cache', type=int, default=True)
+args.add_argument('--to_html', help='Convert RSS news to .html', action='store_true', default=True)
+args.add_argument('--to_pdf', help='Convert RSS news to .pdf', action='store_true', default=True)
 
 
 class TestConfig(unittest.TestCase):

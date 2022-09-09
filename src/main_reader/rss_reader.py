@@ -1,15 +1,17 @@
 """The module is a core"""
 
 import sys
-from .logger import logging_dec, parameter_log
-from .orchestrator import getting_args, getting_config, get_scenarios
-from .loader import loading
-from .rss_parser import Rss
 from pathlib import Path
-from .cache_reader import RssCacher
-from .converter import converter
-from .checker import check_full_rss_lst
-
+sys.path.append(str(Path(__file__).parents[1]))
+sys.path.append(str(Path(__file__).parents[1].joinpath('src')))
+sys.path.append(str(Path(__file__).parents[1].joinpath('src', 'main_reader')))
+from src.main_reader.logger import logging_dec, parameter_log  # noqa: E402
+from src.main_reader.orchestrator import getting_args, getting_config, get_scenarios  # noqa: E402
+from src.main_reader.loader import loading  # noqa: E402
+from src.main_reader.rss_parser import Rss  # noqa: E402
+from src.main_reader.cache_reader import RssCacher  # noqa: E402
+from src.main_reader.converter import converter  # noqa: E402
+from src.main_reader.checker import check_full_rss_lst  # noqa: E402
 
 log = parameter_log()
 args = getting_args()
