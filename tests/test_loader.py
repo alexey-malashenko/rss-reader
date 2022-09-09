@@ -11,8 +11,6 @@ from src.main_reader.loader import loading  # noqa: E402
 class TestLoading(unittest.TestCase):
     @patch('src.main_reader.loader.check_response', return_value=True)
     def test_loading(self, check_response):
+        self.check_response = check_response
         self.loading = loading('http://localhost:8000')
         self.assertEqual(self.loading['bozo'], True)
-
-
-

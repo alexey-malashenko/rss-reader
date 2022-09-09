@@ -11,6 +11,3 @@ class TestRss(unittest.TestCase):
     def test_main(self):
         self.main = main
         self.assertEqual(str(type(self.main)), "<class 'function'>")
-
-
-
