@@ -1,9 +1,9 @@
 from setuptools import setup
 import sys
 from pathlib import Path
-sys.path.append(str(Path(__file__).parents[1]))
-sys.path.append(str(Path(__file__).parents[1].joinpath('src')))
-sys.path.append(str(Path(__file__).parents[1].joinpath('src', 'main_reader')))
+sys.path.append(str(Path(__file__).parents[0]))
+sys.path.append(str(Path(__file__).parents[0].joinpath('src')))
+sys.path.append(str(Path(__file__).parents[0].joinpath('src', 'main_reader')))
 from src.main_reader import __version__  # noqa: E402
 
 
